@@ -76,71 +76,82 @@ public class LoginRegisteration {
         return "Login failed: Username or password incorrect.";
     }
 }
+    
 
     /**
      * @param args the command line arguments 
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        Scanner input = new Scanner(System.in);
+    Scanner input = new Scanner(System.in);
 
-System.out.println("Enter your First Name:");
-String firstname = input.nextLine();
+    System.out.println("Enter your First Name:");
+    String firstname = input.nextLine();
 
-System.out.println("Enter your Last Name:");
-String lastname = input.nextLine();
+    System.out.println("Enter your Last Name:");
+    String lastname = input.nextLine();
 
-// --- Username input with validation ---
-String username;
-while (true) 
+    // --- Username input with validation ---
+    String username;
+    while (true) {
+        System.out.print("Enter your username: ");
+        username = input.nextLine();
+        if (checkUserName(username)) {
+            System.out.println("Username successfully captured.");
+            break;
+        } else {
+            System.out.println("Username is not correctly formatted, please ensure that your username contains an underscore and is no more than five characters in length.");
+        }
+    }
+
+    // --- Password input with validation ---
+    String password;
+    while (true) {
+        System.out.print("Enter your password: ");
+        password = input.nextLine();
+        if (checkPasswordComplexity(password)) {
+            System.out.println("Password successfully captured.");
+            break;
+        } else {
+            System.out.println("Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.");
+        }
+    }
+
+    // --- Cell phone number input with validation ---
+    String phoneNumber;
+    while (true) {
+        System.out.print("Enter your cell phone number with international code (e.g., +27123456789): ");
+        phoneNumber = input.nextLine();
+        if (checkCellPhoneNumber(phoneNumber)) {
+            System.out.println("Cell phone number successfully added.");
+            break;
+        } else {
+            System.out.println("Cell phone number incorrectly formatted or does not contain international code.");
+        }
+    }
+
+    // Registration confirmation
+    System.out.println(registerUser(username, password));
+
     System.out.println("\n----- Login Section -----");
-    System.out.println("Enter your username: ");
-    username = input.nextLine();
-    if (checkUserName(username)) {
-        System.out.println("Username successfully captured.");
-        break;
-    } else {
-        System.out.println("Username is not correctly formatted, please ensure that your username contains an underscore and is no more than five characters in length.");
-    }
-// --- Password input with validation ---
-String password;
-while (true) {
-    System.out.print("Enter your password: ");
-    password = input.nextLine();
-    if (checkPasswordComplexity(password)) {
-        System.out.println("Password successfully captured.");
-        break;
-    } else {
-        System.out.println("Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.");
-    }
-}
 
-// --- Cell phone number input with validation ---
-String phoneNumber;
 while (true) {
-    System.out.print("Enter your cell phone number with international code (e.g., +27123456789): ");
-    phoneNumber = input.nextLine();
-    if (checkCellPhoneNumber(phoneNumber)) {
-        System.out.println("Cell phone number successfully added.");
-        break;
-    } else {
-        System.out.println("Cell phone number incorrectly formatted or does not contain international code.");
-    }
-}
-// Simulate login
-       System.out.println(registerUser(username, password));
-       if (loginUser(username, password) {
+    System.out.print("Enter your username to login: ");
+    String enteredUsername = input.nextLine();
+
+    System.out.print("Enter your password to login: ");
+    String enteredPassword = input.nextLine();
+
+    if (loginUser(username, password, enteredUsername, enteredPassword)) {
         System.out.println("*****Login Successful*****");
         System.out.println("Welcome back, " + firstname + " " + lastname + "!");
-        } else {
+        break; // Exit the login loop
+    } else {
         System.out.println("Login failed: Username or password incorrect.");
-        }
-        input.close();
-        System.out.println(returnLoginStatus(username, password, firstname, lastname));
-       //add comment
-
+        System.out.println("Please try again.\n");
+    }
 }
-}
-    
-    
 
+
+    input.close();
+    }
+}
