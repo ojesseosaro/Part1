@@ -143,15 +143,13 @@ while (true) {
 
     if (loginUser(username, password, enteredUsername, enteredPassword)) {
         System.out.println("*****Login Successful*****");
-        System.out.println("Welcome back, " + firstname + " " + lastname + "!");
+        System.out.println("Welcome back, " + firstname + " " + lastname + "! ,"+ " it nice to to see again!!");
         break; // Exit the login loop
     } else {
         System.out.println("Login failed: Username or password incorrect.");
         System.out.println("Please try again.\n");
     }
 }
-
-
     input.close();
     }
 }
